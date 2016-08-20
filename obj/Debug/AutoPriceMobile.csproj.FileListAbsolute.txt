@@ -1,0 +1,16 @@
+C:\Users\Lenovo Z50\documents\visual studio 2013\Projects\AutoPriceMobile\AutoPriceMobile\bin\Microsoft.Owin.xml
+C:\Users\Lenovo Z50\documents\visual studio 2013\Projects\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo Z50\Documents\Visual Studio 2013\Projects\AutoPriceMobile\AutoPriceMobile\bin\AutoPriceMobile.dll.config
+C:\Users\Lenovo Z50\Documents\Visual Studio 2013\Projects\AutoPriceMobile\AutoPriceMobile\bin\AutoPriceMobile.dll
+C:\Users\Lenovo Z50\Documents\Visual Studio 2013\Projects\AutoPriceMobile\AutoPriceMobile\bin\AutoPriceMobile.pdb
+C:\Users\Lenovo Z50\Documents\Visual Studio 2013\Projects\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.dll
+C:\Users\Lenovo Z50\Documents\Visual Studio 2013\Projects\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.pdb
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\bin\AutoPriceMobile.dll.config
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\bin\AutoPriceMobile.dll
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\bin\AutoPriceMobile.pdb
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\bin\Microsoft.Owin.xml
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.dll
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.pdb
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.Properties.Resources.resources
+C:\Users\Lenovo Z50\Desktop\AutoPriceMobile\AutoPriceMobile\obj\Debug\AutoPriceMobile.csproj.GenerateResource.Cache

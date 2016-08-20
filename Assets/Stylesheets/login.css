@@ -1,0 +1,115 @@
+﻿#login-container {
+            margin:auto;
+            text-align:center;
+        }
+
+        .box_login {
+            margin:30px auto 30px auto;
+            width: 400px;
+            -moz-box-shadow: 0px 3px 6px #c9c9c9;
+            -webkit-box-shadow: 0px 3px 6px #c9c9c9;
+            box-shadow: 0px 3px 6px #c9c9c9;
+        }
+
+        fieldset {
+            background-color: #fff;
+            border: none;
+            padding: 20px 10px 10px 10px;
+        }
+
+        h2 {
+            color: #fff;
+            background-color: #24b2dd;
+            font-size: 20px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+
+
+               .buttons {
+            padding: 7px 15px 10px 15px;
+            font-size: 16px;
+            font-family: 'Lato', sans-serif;
+            color: #fff;
+            border: solid 5px #24b2dd;
+            text-decoration: none;
+            background-color: #24b2dd;
+            cursor: pointer;
+        }
+
+            .buttons:hover {
+                border-radius: 20px 20px;
+            }
+
+        .hvr-radial-out {
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            -webkit-transition-property: color;
+            transition-property: color;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+        }
+
+            .hvr-radial-out:before {
+                content: "";
+                position: absolute;
+                z-index: -1;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #fff;
+                border-radius: 100%;
+                -webkit-transform: scale(0);
+                transform: scale(0);
+                -webkit-transition-property: transform;
+                transition-property: transform;
+                -webkit-transition-duration: 0.3s;
+                transition-duration: 0.3s;
+                -webkit-transition-timing-function: ease-out;
+                transition-timing-function: ease-out;
+            }
+
+            .hvr-radial-out:hover, .hvr-radial-out:focus, .hvr-radial-out:active {
+                color: #fff;
+                background: #e90029;
+            }
+
+                .hvr-radial-out:hover:before, .hvr-radial-out:focus:before, .hvr-radial-out:active:before {
+                    -webkit-transform: scale(2);
+                    transform: scale(2);
+                }
+       
+
+        .forgot_pass_msg a {
+            color: blue;
+            cursor: pointer;
+            font-family: "Lato Light", sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .forgot_passw_msg {
+            font-family: "Lato Light", sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+
+        p {
+            padding-bottom: 10px;
+        }
+        p_validation
+        {
+            padding-bottom: 3px;
+
+        }

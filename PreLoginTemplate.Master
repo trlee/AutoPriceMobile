@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PreLoginTemplate.master.cs" Inherits="AutoPriceMobile.PreLoginTemplate" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="Assets/Stylesheets/style.css" />
+    <link rel="stylesheet" href="Assets/Stylesheets/hover.css" media="all" />
+    <link rel="stylesheet" href="Assets/Stylesheets/login.css" />
+    <link rel="stylesheet" href="Assets/Stylesheets/signup.css" />
+
+    <style type="text/css">
+        .auto-style1 {
+            width: 241px;
+        }
+        .auto-style2 {
+            width: 241px;
+            height: 56px;
+        }
+        .auto-style3 {
+            width: 98px;
+        }
+        .auto-style4 {
+            width: 123px;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div style="float:left" id="Logo">
+                *INSERT AUTOPRICE LOGO*
+            <br />
+            <!--<asp:Image runat="server" Width="255px" Height="60px"/>-->
+            </div>
+            <div id="topnavbar">
+                <ul id="topmenu">
+                   <li id="navbar_intro" runat="server">
+                        <a href="~/intro.aspx" runat="server">Home</a>
+                   </li>
+                   <li id="navbar_login" runat="server">
+                        <a href="~/login.aspx" runat="server">Login</a>
+                   </li>
+                    <li id="navbar_signup" runat="server">
+                       <a href="~/signup.aspx" runat="server">SignUp</a>
+                   </li>             
+                   
+                </ul>
+
+            </div>
+     </div>
+        
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            
+        </asp:ContentPlaceHolder>
+    
+    </form>
+</body>
+</html>

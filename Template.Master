@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Template.master.cs" Inherits="AutoPriceMobile.Template" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="Assets/Stylesheets/masterStyle.css" />
+    <link rel="stylesheet" href="Assets/Stylesheets/style.css" />
+    <link rel="stylesheet" href="Assets/Stylesheets/hover.css" media="all" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form2" runat="server">
+    <div>
+        <div style="float:left" id="Logo">
+                *INSERT AUTOPRICE LOGO*
+            <br />
+        </div>
+        <div style="padding-left: 5px; padding-top: 10px; height: 30px">
+            <div style="float: right; padding-right: 50px; padding-top: 12px;">
+                 <asp:Label ID="welcome_msg" runat="server" CssClass="welcome_msg" />
+            </div>
+        </div>
+        <div style="align-content:center">
+                <asp:TextBox ID="searchbox" runat="server" ToolTip="Search" placeholder="Search Autoprice..." Height="30px" Width="500px" CssClass="txtbox"></asp:TextBox>
+                <asp:Button ID="searchSubmit" runat="server" OnClick="searchSubmit_Click" Text="Search" CssClass="searchBtn"/>
+                <ul id="topmenu">
+                   <li id="Li1" runat="server">
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/src/main/main.aspx">Home</asp:HyperLink>
+                   </li>
+                   <li id="Li2" runat="server">
+                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/src/main/profileView.aspx?=ID{0}" Width="45px">Profile</asp:HyperLink>
+                   </li>             
+                   <li id="Li3" runat="server">
+                       <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/src/main/itemlist.aspx">ItemList</asp:HyperLink>
+                   </li>
+                   <li id="Li4" runat="server">
+                       <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/logout.aspx">Log Out</asp:HyperLink>
+                   </li>
+                </ul>
+                
+            </div>
+        <br />
+        <br />
+            
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                
+                <!-- CONTENT TO BE ADDED TO ALL PAGES HERE -->
+        </asp:ContentPlaceHolder>
+
+    </form>
+
+
+</body>
+</html>
