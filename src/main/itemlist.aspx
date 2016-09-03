@@ -12,19 +12,21 @@
         <asp:GridView ID="ItemList" runat="server" DataKeyNames="UserID" OnRowDeleting="ItemList_RowDeleting" AutoGenerateColumns="false" EmptyDataText="There are no items to display. Please check back later!" RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px">
             <AlternatingRowStyle BackColor="White" Height="50px"/>
             <Columns>
-                <asp:BoundField DataField="StockName" HeaderText="Item Name" SortExpression="StockName" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="ItemName" HeaderText="Item Name" SortExpression="ItemName" ItemStyle-Width="100px" />
                 <asp:TemplateField HeaderText="Item Image">
                     <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" ImageUrl='<%#"data:Image/png;base64," + Convert.ToBase64String((byte[])Eval("StockImage")) %>'/>
+                        <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" ImageUrl='<%#"data:Image/png;base64," + Convert.ToBase64String((byte[])Eval("ItemImage")) %>'/>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="StockDescription" HeaderText="Item Description" SortExpression="StockDescription" ItemStyle-Width="300px" />
+                <asp:BoundField DataField="ItemDescription" HeaderText="Item Description" SortExpression="ItemDescription" ItemStyle-Width="300px" />
                 <asp:BoundField DataField="UserID" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
                 <asp:BoundField DataField="UserName" HeaderText="User" SortExpression="UserName" ItemStyle-Width="100px" Visible="false"/>
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" ItemStyle-Width="100px" />
-                <asp:BoundField DataField="Time" HeaderText="Time Elapsed" SortExpression="Time" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="Time" HeaderText="Start Time" SortExpression="Time" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="TimeEnd" HeaderText="End Time" SortExpression="TimeEnd" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
+                <asp:HyperLinkField Text="Edit" DataNavigateUrlFields="ItemID" DataNavigateUrlFormatString="~/src/main/itemedit.aspx?ItemID={0}"/>
                 <asp:TemplateField>
 			            <ItemTemplate >
 				            <asp:LinkButton ID="Delete" runat="server" CommandName="Delete"
@@ -69,29 +71,5 @@
             </center>
 		</div>
 	</div>
-</div>
-<div id="popup_quickadd" class="overlay">
-	        <div class="popup">
-                <a class="close" href="#">×</a>
-                <br />
-		        <h2 >Add an Item</h2>
-		        <p>
-                <asp:TextBox ID="quickadd_itemName" ToolTip="Name" runat="server" placeholder="Name"></asp:TextBox>
-		        </p>
-                <p>
-                <asp:TextBox ID="quickadd_itemDesc" runat="server" TextMode="MultiLine" placeholder="Description"></asp:TextBox>
-                </p>                    
-                <p>
-                Item Image: <asp:FileUpload ID="quickadd_itemImg" runat="server" AllowMultiple="false" Enabled="true"/>
-                </p>
-                <p>
-                <asp:TextBox ID="quickadd_itemPrice" runat="server" placeholder="Price"></asp:TextBox>
-                </p>
-                <p>
-                <asp:TextBox ID="quickadd_itemQty" runat="server" placeholder="Quantity"></asp:TextBox>
-                </p>
-                <asp:Button runat="server" ID="submit_quickadd" Text="Submit" Width="80px" Height="20px" OnClick="submit_quickadd_Click"/>&nbsp
-             </div>
-
 </div>
 </asp:Content>

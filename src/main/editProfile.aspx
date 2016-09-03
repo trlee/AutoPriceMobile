@@ -9,6 +9,7 @@
         <div style="text-align:center">
             <br />
             <asp:Label ID="edit_error" runat="server" ForeColor="Red"></asp:Label>
+            <asp:Label ID="edit_success" runat="server" ForeColor="Green"></asp:Label>
             <br />
         </div>
         

@@ -89,7 +89,8 @@ namespace AutoPriceMobile.src.main
                         Response.Write(ex.Message);
                     }
                 }
-                Response.Redirect("main.aspx");
+                edit_success.Text = "The changes have been made to your profile.";
+                //Response.Redirect("main.aspx");
                 //Response.Redirect("profileView.aspx?ID="+Session["userID"].ToString());
 
             }
@@ -123,7 +124,8 @@ namespace AutoPriceMobile.src.main
                             Response.Write(ex.Message);
                         }
                     }
-                    Response.Redirect("main.aspx");
+                    edit_success.Text = "The changes have been made to your profile.";
+                    //Response.Redirect("main.aspx");
                     //Response.Redirect("profileView.apsx?ID=" + Session["userID"].ToString());
                 }
                 else
@@ -152,7 +154,8 @@ namespace AutoPriceMobile.src.main
                         sqlConn.Open();
                         updateProfile.ExecuteNonQuery();
                         Session["username"] = edit_name.Text;
-                        Response.Redirect("main.aspx");
+                        edit_success.Text = "The changes have been made to your profile.";
+                        //Response.Redirect("main.aspx");
                         //Response.Redirect("profileView.apsx?ID=" + Session["userID"].ToString());
                     }
                     catch (Exception ex)
@@ -191,7 +194,8 @@ namespace AutoPriceMobile.src.main
                             sqlConn.Open();
                             updateProfile.ExecuteNonQuery();
                             Session["username"] = edit_name.Text;
-                            Response.Redirect("main.aspx");
+                            edit_success.Text = "The changes have been made to your profile.";
+                            //Response.Redirect("main.aspx");
                             //Response.Redirect("profileView.apsx?ID=" + Session["userID"].ToString());
                         }
                         catch (Exception ex)

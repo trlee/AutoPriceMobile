@@ -11,18 +11,18 @@
         <asp:GridView ID="FriendItems" runat="server" DataKeyNames="UserID" OnRowDeleting="FriendItems_RowDeleting" AutoGenerateColumns="false" EmptyDataText="There are no items to display. Please check back later!" RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px" OnRowDataBound="FriendItems_RowDataBound">
             <AlternatingRowStyle BackColor="White" Height="50px"/>
             <Columns>
-                <asp:BoundField DataField="StockName" HeaderText="Item Name" SortExpression="StockName" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="ItemName" HeaderText="Item Name" SortExpression="ItemName" ItemStyle-Width="100px" />
                 <asp:TemplateField HeaderText="Item Image">
                     <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" ImageUrl='<%#"data:Image/png;base64," + Convert.ToBase64String((byte[])Eval("StockImage")) %>'/>
+                        <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" ImageUrl='<%#"data:Image/png;base64," + Convert.ToBase64String((byte[])Eval("ItemImage")) %>'/>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="StockDescription" HeaderText="Item Description" SortExpression="StockDescription" ItemStyle-Width="300px" />
+                <asp:BoundField DataField="ItemDescription" HeaderText="Item Description" SortExpression="ItemDescription" ItemStyle-Width="300px" />
                 <asp:BoundField DataField="UserID" HeaderText="UserID" SortExpression="UserID" ItemStyle-Width="100px" Visible="false"/>
                 <asp:HyperLinkField DataTextField="UserName" DataNavigateUrlFields="UserID" DataNavigateUrlFormatString="~/src/main/profileView.aspx?ID={0}" HeaderText="User Name" ItemStyle-Width="300px"/>
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" ItemStyle-Width="100px" />
-                <asp:BoundField DataField="Time" HeaderText="Time Elapsed" SortExpression="Time" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="Time" HeaderText="Start Time" SortExpression="Time" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
                 <asp:TemplateField>
 			            <ItemTemplate >
@@ -45,13 +45,13 @@
         <asp:GridView ID="GlobalItems" runat="server" DataKeyNames="UserID" OnRowDeleting="GlobalItems_RowDeleting" AutoGenerateColumns="false" EmptyDataText="There are no items to display. Please check back later!" RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px" OnRowDataBound="GlobalItems_RowDataBound">
             <AlternatingRowStyle BackColor="White" Height="50px"/>
             <Columns>
-                <asp:BoundField DataField="StockName" HeaderText="Item Name" SortExpression="StockName" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="ItemName" HeaderText="Item Name" SortExpression="ItemName" ItemStyle-Width="100px" />
                 <asp:TemplateField HeaderText="Item Image">
                     <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" ImageUrl='<%#"data:Image/png;base64," + Convert.ToBase64String((byte[])Eval("StockImage")) %>'/>
+                        <asp:Image ID="Image1" runat="server" Height="300px" Width="300px" ImageUrl='<%#"data:Image/png;base64," + Convert.ToBase64String((byte[])Eval("ItemImage")) %>'/>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="StockDescription" HeaderText="Item Description" SortExpression="StockDescription" ItemStyle-Width="300px" />
+                <asp:BoundField DataField="ItemDescription" HeaderText="Item Description" SortExpression="ItemDescription" ItemStyle-Width="300px" />
                 <asp:BoundField DataField="UserID" HeaderText="UserID" SortExpression="UserID" ItemStyle-Width="300px" Visible="false"/>
                 <asp:HyperLinkField DataTextField="UserName" DataNavigateUrlFields="UserID" DataNavigateUrlFormatString="~/src/main/profileView.aspx?ID={0}" HeaderText="User Name" ItemStyle-Width="300px"/>
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" ItemStyle-Width="100px" />

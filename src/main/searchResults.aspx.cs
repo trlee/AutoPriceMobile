@@ -76,7 +76,7 @@ namespace AutoPriceMobile.src.main
         protected void FillItemResults()
         {
             SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand getItems = new SqlCommand("SELECT * FROM [dbo].ItemSale WHERE StockName LIKE '%" + Request.QueryString["q"] + "%' OR StockDescription LIKE '%" + Request.QueryString["q"] + "%' OR UserName LIKE '%" + Request.QueryString["q"] + "%' AND Status = 1", conn);
+            SqlCommand getItems = new SqlCommand("SELECT * FROM [dbo].ItemSale WHERE ItemName LIKE '%" + Request.QueryString["q"] + "%' OR ItemDescription LIKE '%" + Request.QueryString["q"] + "%' OR UserName LIKE '%" + Request.QueryString["q"] + "%' AND Status = 1", conn);
             //getItems.Parameters.AddWithValue("@param", Request.QueryString["q"]);
             SqlDataAdapter da = new SqlDataAdapter(getItems);
             DataSet dt = new DataSet();

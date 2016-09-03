@@ -29,7 +29,7 @@ namespace AutoPriceMobile.src. main
         protected void FillFriendList()
         {
             SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand getItems = new SqlCommand("SELECT * FROM dbo.[ItemSale] i, dbo.[FollowerList] f WHERE i.UserID = f.UserID AND f.FollowerID = " + Session["userid"] + " ORDER BY Time DESC;", conn);
+            SqlCommand getItems = new SqlCommand("SELECT * FROM dbo.[ItemSale] i, dbo.[FollowerList] f WHERE i.UserID = f.UserID AND f.FollowerID = " + Session["userid"] + " AND i.TimeEnd >= '" + DateTime.Now.ToString("HH:mm:ss tt") + "' ORDER BY Time DESC;", conn);
             SqlDataAdapter da = new SqlDataAdapter(getItems);
             DataSet dt = new DataSet();
             da.Fill(dt);
@@ -42,7 +42,7 @@ namespace AutoPriceMobile.src. main
         protected void FillGlobalList()
         {
             SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand getGlobalItems = new SqlCommand("SELECT TOP 100 * FROM dbo.[ItemSale] WHERE Status = 1 ORDER BY Time DESC", conn);
+            SqlCommand getGlobalItems = new SqlCommand("SELECT TOP 100 * FROM dbo.[ItemSale] WHERE Status = 1 AND TimeEnd >= '" + DateTime.Now.ToString("HH:mm:ss tt") + "' ORDER BY Time DESC", conn);
             SqlDataAdapter da = new SqlDataAdapter(getGlobalItems);
             DataSet dt = new DataSet();
             da.Fill(dt);

@@ -22,6 +22,15 @@ namespace AutoPriceMobile.src.main {
         protected global::System.Web.UI.WebControls.Label edit_error;
         
         /// <summary>
+        /// edit_success control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label edit_success;
+        
+        /// <summary>
         /// edit_name control.
         /// </summary>
         /// <remarks>

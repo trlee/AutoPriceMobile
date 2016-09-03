@@ -90,6 +90,8 @@
     <Content Include="obj\Debug\AutoPriceMobile.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\AutoPriceMobile.dll" />
     <Content Include="obj\Debug\AutoPriceMobile.pdb" />
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
     <None Include="Resources\anon.bmp" />
     <Content Include="Scripts\images\ajax-loader.gif" />
     <Content Include="Scripts\images\icons-png\action-black.png" />
@@ -310,6 +312,7 @@
     <Content Include="Scripts\jquery.mobile.theme-1.4.5.css" />
     <Content Include="Scripts\jquery.mobile.theme-1.4.5.min.css" />
     <Content Include="signup.aspx" />
+    <Content Include="src\main\itemedit.aspx" />
     <Content Include="src\main\itemlist.aspx" />
     <Content Include="src\main\itemupload.aspx" />
     <Content Include="src\main\logout.aspx" />
@@ -371,6 +374,13 @@
     </Compile>
     <Compile Include="signup.aspx.designer.cs">
       <DependentUpon>signup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\main\itemedit.aspx.cs">
+      <DependentUpon>itemedit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="src\main\itemedit.aspx.designer.cs">
+      <DependentUpon>itemedit.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\main\itemlist.aspx.cs">
       <DependentUpon>itemlist.aspx</DependentUpon>

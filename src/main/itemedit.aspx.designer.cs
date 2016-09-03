@@ -10,7 +10,7 @@
 namespace AutoPriceMobile.src.main {
     
     
-    public partial class itemupload {
+    public partial class itemedit {
         
         /// <summary>
         /// lblText control.
@@ -22,67 +22,67 @@ namespace AutoPriceMobile.src.main {
         protected global::System.Web.UI.WebControls.Label lblText;
         
         /// <summary>
-        /// add_itemName control.
+        /// itemimage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox add_itemName;
+        protected global::System.Web.UI.WebControls.Image itemimage;
         
         /// <summary>
-        /// add_itemDesc control.
+        /// edit_itemName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox add_itemDesc;
+        protected global::System.Web.UI.WebControls.TextBox edit_itemName;
         
         /// <summary>
-        /// add_itemImg control.
+        /// edit_itemDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload add_itemImg;
+        protected global::System.Web.UI.WebControls.TextBox edit_itemDesc;
         
         /// <summary>
-        /// add_itemPrice control.
+        /// edit_itemPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox add_itemPrice;
+        protected global::System.Web.UI.WebControls.TextBox edit_itemPrice;
         
         /// <summary>
-        /// add_itemQty control.
+        /// edit_itemQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox add_itemQty;
+        protected global::System.Web.UI.WebControls.TextBox edit_itemQty;
         
         /// <summary>
-        /// add_itemDuration control.
+        /// edit_itemDuration control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox add_itemDuration;
+        protected global::System.Web.UI.WebControls.TextBox edit_itemDuration;
         
         /// <summary>
-        /// add_itemStatus control.
+        /// edit_itemStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList add_itemStatus;
+        protected global::System.Web.UI.WebControls.DropDownList edit_itemStatus;
         
         /// <summary>
         /// submitbtn control.

@@ -38,18 +38,11 @@ namespace AutoPriceMobile.src.main
             sqlConn.Close();
         }
 
-        protected void submit_quickadd_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         protected void ItemList_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             SqlConnection sqlConn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand deleteItem = new SqlCommand("DELETE FROM dbo.[ItemSale] WHERE StockName = @StockName AND StockDescription = @StockDescription AND Time = @Time", sqlConn);
-            deleteItem.Parameters.AddWithValue("@StockName", ItemList.Rows[e.RowIndex].Cells[0].Text);
-            deleteItem.Parameters.AddWithValue("@StockDescription", ItemList.Rows[e.RowIndex].Cells[2].Text);
-            deleteItem.Parameters.AddWithValue("@Time", ItemList.Rows[e.RowIndex].Cells[7].Text);
+            SqlCommand deleteItem = new SqlCommand("DELETE FROM dbo.[ItemSale] WHERE ItemID = @ItemID", sqlConn);
+            deleteItem.Parameters.AddWithValue("@ItemID", ItemList.Rows[e.RowIndex].Cells[10].Text);
 
             using (sqlConn)
             {
