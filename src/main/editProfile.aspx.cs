@@ -21,29 +21,33 @@ namespace AutoPriceMobile.src.main
             {
                 Response.Redirect("~/login.aspx");
             }
-            edit_name.Text = Session["username"].ToString();
-            SqlConnection sqlConn = new SqlConnection(Shared.SqlConnString);
 
-            using (sqlConn)
+            if (!IsPostBack)
             {
-                try
-                {
-                    SqlCommand getUserInfo = new SqlCommand("SELECT Email FROM dbo.[UserInfo] WHERE UserID = @UserID", sqlConn);
-                    getUserInfo.Parameters.AddWithValue("@UserID", Session["userID"].ToString());
-                    sqlConn.Open();
+                edit_name.Text = Session["username"].ToString();
+                SqlConnection sqlConn = new SqlConnection(Shared.SqlConnString);
 
-                    SqlDataReader reader = getUserInfo.ExecuteReader();
-                    if (reader.HasRows)
+                using (sqlConn)
+                {
+                    try
                     {
-                        while (reader.Read())
+                        SqlCommand getUserInfo = new SqlCommand("SELECT Email FROM dbo.[UserInfo] WHERE UserID = @UserID", sqlConn);
+                        getUserInfo.Parameters.AddWithValue("@UserID", Session["userID"].ToString());
+                        sqlConn.Open();
+
+                        SqlDataReader reader = getUserInfo.ExecuteReader();
+                        if (reader.HasRows)
                         {
-                            edit_email.Text = reader[0].ToString();
+                            while (reader.Read())
+                            {
+                                edit_email.Text = reader[0].ToString();
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Response.Write(ex.Message);
+                    catch (Exception ex)
+                    {
+                        Response.Write(ex.Message);
+                    }
                 }
             }
 

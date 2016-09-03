@@ -52,7 +52,11 @@ namespace AutoPriceMobile.src.main
 
             if (userID == Session["userID"].ToString())
             {
-                fillValues();
+                if(!IsPostBack)
+                {
+                    fillValues();
+                }
+                
             }
             else
             {
@@ -256,7 +260,8 @@ namespace AutoPriceMobile.src.main
             }
             else
             {
-                edit_itemDuration.Text = duration.ToString();
+                Math.Round(duration, 2);
+                edit_itemDuration.Text = duration.ToString("#.##");
             }
 
         }
@@ -310,8 +315,7 @@ namespace AutoPriceMobile.src.main
             else
             {
                 int status = 0;
-                SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-
+                
                 if (edit_itemStatus.SelectedValue == "Global")
                 {
                     status = 1;
@@ -320,24 +324,25 @@ namespace AutoPriceMobile.src.main
                 {
                     status = 0;
                 }
+                SqlConnection conn = new SqlConnection(Shared.SqlConnString);
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.[ItemSale] SET ItemName=@ItemName, ItemDescription=@ItemDescription, UserName=@UserName, Quantity=@Quantity, Price=@Price, Time=@Time, TimeEnd=@TimeEnd, Status=@Status WHERE ItemID=@ItemID", conn);
+                cmd.Parameters.AddWithValue("@ItemName", edit_itemName.Text);
+                cmd.Parameters.AddWithValue("@ItemDescription", edit_itemDesc.Text);
+                cmd.Parameters.AddWithValue("@UserName", Session["username"].ToString());
+                cmd.Parameters.AddWithValue("@Quantity", edit_itemQty.Text);
+                cmd.Parameters.AddWithValue("@Price", Math.Round(parseValue, 2));
+                cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
+                cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+Convert.ToDouble(edit_itemDuration.Text)).ToString("yyyy-MM-dd HH:mm:ss tt"));
+                cmd.Parameters.AddWithValue("@Status", status);
+                cmd.Parameters.AddWithValue("@ItemID", Request.QueryString["ItemID"].ToString());
 
                 using (conn)
                 {
                     try
-                    {
-                        conn.Open();
+                    {         
                         if (parsed && parsed2 && parsed3)
                         {
-                            SqlCommand cmd = new SqlCommand("UPDATE dbo.[ItemSale] SET ItemName = @ItemName, ItemDescription = @ItemDescription, UserName = @UserName, Quantity = @Quantity, Price = @Price, Time = @Time, TimeEnd = @TimeEnd, Status = @Status WHERE ItemID = @ItemID", conn);
-                            cmd.Parameters.AddWithValue("@ItemName", edit_itemName.Text);
-                            cmd.Parameters.AddWithValue("@ItemDescription", edit_itemDesc.Text);
-                            cmd.Parameters.AddWithValue("@UserName", Session["username"].ToString());
-                            cmd.Parameters.AddWithValue("@Quantity", edit_itemQty.Text);
-                            cmd.Parameters.AddWithValue("@Price", edit_itemPrice.Text);
-                            cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
-                            cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+Convert.ToDouble(edit_itemDuration.Text)).ToString("yyyy-MM-dd HH:mm:ss tt"));
-                            cmd.Parameters.AddWithValue("@Status", status);
-                            cmd.Parameters.AddWithValue("@ItemID", Request.QueryString["ItemID"].ToString());
+                            conn.Open();
                             cmd.ExecuteNonQuery();
                             lblText.Text = "Item Successfully updated.";
                         }
