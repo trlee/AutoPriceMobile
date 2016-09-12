@@ -26,7 +26,9 @@
                 <asp:BoundField DataField="Time" HeaderText="Start Time" SortExpression="Time" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="TimeEnd" HeaderText="End Time" SortExpression="TimeEnd" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
-                <asp:HyperLinkField Text="Edit" DataNavigateUrlFields="ItemID" DataNavigateUrlFormatString="~/src/main/itemedit.aspx?ItemID={0}"/>
+                <asp:BoundField DataField="PriceDiff" HeaderText="Price Difference" SortExpression="PriceDiff" ItemStyle-Width="100px" Visible="true"/>
+                <asp:BoundField DataField="SoldCount" HeaderText="Quantity Sold" SortExpression="SoldCount" ItemStyle-Width="100px" Visible="true" />
+                <asp:HyperLinkField Text="Edit" DataNavigateUrlFields="ItemID" DataNavigateUrlFormatString="~/src/main/itemedit.aspx?ItemID={0}" ItemStyle-Width="100px"/>
                 <asp:TemplateField>
 			            <ItemTemplate >
 				            <asp:LinkButton ID="Delete" runat="server" CommandName="Delete"

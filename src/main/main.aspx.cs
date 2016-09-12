@@ -29,7 +29,7 @@ namespace AutoPriceMobile.src. main
         protected void FillFriendList()
         {
             SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand getItems = new SqlCommand("SELECT * FROM dbo.[ItemSale] i, dbo.[FollowerList] f WHERE i.UserID = f.UserID AND f.FollowerID = " + Session["userid"] + " AND i.TimeEnd >= '" + DateTime.Now.ToString("HH:mm:ss tt") + "' ORDER BY Time DESC;", conn);
+            SqlCommand getItems = new SqlCommand("SELECT * FROM dbo.[ItemSale] i, dbo.[FollowerList] f WHERE i.UserID = f.UserID AND f.FollowerID = " + Session["userid"] + " AND i.TimeEnd >= '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt") + "' ORDER BY Time DESC;", conn);
             SqlDataAdapter da = new SqlDataAdapter(getItems);
             DataSet dt = new DataSet();
             da.Fill(dt);
@@ -42,7 +42,7 @@ namespace AutoPriceMobile.src. main
         protected void FillGlobalList()
         {
             SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand getGlobalItems = new SqlCommand("SELECT TOP 100 * FROM dbo.[ItemSale] WHERE Status = 1 AND TimeEnd >= '" + DateTime.Now.ToString("HH:mm:ss tt") + "' ORDER BY Time DESC", conn);
+            SqlCommand getGlobalItems = new SqlCommand("SELECT TOP 100 * FROM dbo.[ItemSale] WHERE Status = 1 AND TimeEnd >= '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt") + "' ORDER BY Time DESC", conn);
             SqlDataAdapter da = new SqlDataAdapter(getGlobalItems);
             DataSet dt = new DataSet();
             da.Fill(dt);
@@ -64,11 +64,63 @@ namespace AutoPriceMobile.src. main
 
         protected void FriendItems_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                double price = Convert.ToDouble(e.Row.Cells[6].Text);
+                DateTime start = Convert.ToDateTime(e.Row.Cells[7].Text);
+                DateTime end = Convert.ToDateTime(e.Row.Cells[8].Text);
+                double difference = Convert.ToDouble(e.Row.Cells[9].Text);
+                int soldCount = Convert.ToInt32(e.Row.Cells[10].Text);
+                int quantity = Convert.ToInt32(e.Row.Cells[5].Text);
+                e.Row.Cells[9].Visible = false;
+                e.Row.Cells[10].Visible = false;
+
+                double total = 0;
+                if (soldCount == 0)
+                {
+                    //(Starting Price)-((Starting Price)-(Ending Price))*{((Current Time)-(Starting Time))/(Ending Time)-(Starting Time))}
+                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours));
+                }
+                else
+                {
+                    //(Starting Price)-((Starting Price)-(Ending Price))*{((Current Time)-(Starting Time))/(Ending Time)-(Starting Time))} 
+                    //      +((Available quantity)-(Quantity sold))*Price Difference
+
+                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours) + (quantity - soldCount) * difference);
+                }
+
+                e.Row.Cells[6].Text = Math.Round(total, 2).ToString();
+                
+
+            }
         }
 
         protected void GlobalItems_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                double price = Convert.ToDouble(e.Row.Cells[6].Text);
+                DateTime start = Convert.ToDateTime(e.Row.Cells[7].Text);
+                DateTime end = Convert.ToDateTime(e.Row.Cells[8].Text);
+                double difference = Convert.ToDouble(e.Row.Cells[9].Text);
+                int soldCount = Convert.ToInt32(e.Row.Cells[10].Text);
+                int quantity = Convert.ToInt32(e.Row.Cells[5].Text);
+                e.Row.Cells[9].Visible = false;
+                e.Row.Cells[10].Visible = false;
 
+                double total = 0;
+                if (soldCount == 0)
+                {
+                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours));
+                }
+                else
+                {
+                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours) + (quantity-soldCount)*difference); 
+                }
+                
+
+                e.Row.Cells[6].Text = Math.Round(total, 2).ToString();
+            }
         }
     }
 }

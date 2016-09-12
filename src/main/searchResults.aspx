@@ -30,7 +30,7 @@
             Items Results
         </h2>
         <fieldset>
-            <asp:GridView ID="ItemResults" runat="server" DataKeyNames="UserID" OnRowDataBound="ItemResults_RowDataBound" OnRowDeleting="ItemResults_RowDeleting" AutoGenerateColumns="false" EmptyDataText="No items found..." RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px">
+            <asp:GridView ID="ItemResults" runat="server" DataKeyNames="ItemID" OnRowDataBound="ItemResults_RowDataBound" OnRowDeleting="ItemResults_RowDeleting" AutoGenerateColumns="false" EmptyDataText="No items found..." RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px">
                 <AlternatingRowStyle BackColor="White" Height="50px"/>
                 <Columns>
                     <asp:BoundField DataField="ItemName" HeaderText="Item Name" SortExpression="ItemName" ItemStyle-Width="100px" />
@@ -44,7 +44,7 @@
                     <asp:HyperLinkField DataTextField="UserName" DataNavigateUrlFields="UserID" DataNavigateUrlFormatString="~/src/main/profileView.aspx?ID={0}" HeaderText="User Name" ItemStyle-Width="300px"/>
                     <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" ItemStyle-Width="100px" />
                     <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" ItemStyle-Width="100px" />
-                    <asp:BoundField DataField="Time" HeaderText="Time Elapsed" SortExpression="Time" ItemStyle-Width="100px" />
+                    <asp:BoundField DataField="Time" HeaderText="Start Time" SortExpression="Time" ItemStyle-Width="100px" />
                     <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
                 </Columns>
             </asp:GridView>

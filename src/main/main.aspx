@@ -8,7 +8,7 @@
         Friend Items
     </h2>
     <fieldset>
-        <asp:GridView ID="FriendItems" runat="server" DataKeyNames="UserID" OnRowDeleting="FriendItems_RowDeleting" AutoGenerateColumns="false" EmptyDataText="There are no items to display. Please check back later!" RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px" OnRowDataBound="FriendItems_RowDataBound">
+        <asp:GridView ID="FriendItems" runat="server" DataKeyNames="ItemID" OnRowDeleting="FriendItems_RowDeleting" AutoGenerateColumns="false" EmptyDataText="There are no items to display. Please check back later!" RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px" OnRowDataBound="FriendItems_RowDataBound">
             <AlternatingRowStyle BackColor="White" Height="50px"/>
             <Columns>
                 <asp:BoundField DataField="ItemName" HeaderText="Item Name" SortExpression="ItemName" ItemStyle-Width="100px" />
@@ -23,6 +23,9 @@
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Time" HeaderText="Start Time" SortExpression="Time" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="TimeEnd" HeaderText="End Time" SortExpression="TimeEnd" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="PriceDiff" SortExpression="PriceDiff" ItemStyle-Width="100px" Visible="true"/>
+                <asp:BoundField DataField="SoldCount" SortExpression="SoldCount" ItemStyle-Width="100px" Visible="true" />
                 <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
                 <asp:TemplateField>
 			            <ItemTemplate >
@@ -42,7 +45,7 @@
         Global Item Lists
     </h2>
     <fieldset>
-        <asp:GridView ID="GlobalItems" runat="server" DataKeyNames="UserID" OnRowDeleting="GlobalItems_RowDeleting" AutoGenerateColumns="false" EmptyDataText="There are no items to display. Please check back later!" RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px" OnRowDataBound="GlobalItems_RowDataBound">
+        <asp:GridView ID="GlobalItems" runat="server" DataKeyNames="ItemID" OnRowDeleting="GlobalItems_RowDeleting" AutoGenerateColumns="false" EmptyDataText="There are no items to display. Please check back later!" RowStyle-HorizontalAlign="Center" GridLines="None" Width="1300px" OnRowDataBound="GlobalItems_RowDataBound">
             <AlternatingRowStyle BackColor="White" Height="50px"/>
             <Columns>
                 <asp:BoundField DataField="ItemName" HeaderText="Item Name" SortExpression="ItemName" ItemStyle-Width="100px" />
@@ -56,7 +59,10 @@
                 <asp:HyperLinkField DataTextField="UserName" DataNavigateUrlFields="UserID" DataNavigateUrlFormatString="~/src/main/profileView.aspx?ID={0}" HeaderText="User Name" ItemStyle-Width="300px"/>
                 <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Quantity" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" ItemStyle-Width="100px" />
-                <asp:BoundField DataField="Time" HeaderText="Time Elapsed" SortExpression="Time" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="Time" HeaderText="Start Time" SortExpression="Time" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="TimeEnd" HeaderText="End Time" SortExpression="TimeEnd" ItemStyle-Width="100px" />
+                <asp:BoundField DataField="PriceDiff" SortExpression="PriceDiff" ItemStyle-Width="100px" Visible="true"/>
+                <asp:BoundField DataField="SoldCount" SortExpression="SoldCount" ItemStyle-Width="100px" Visible="true" />
                 <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
                 <asp:TemplateField>
 			            <ItemTemplate >

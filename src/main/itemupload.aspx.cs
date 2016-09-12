@@ -103,7 +103,7 @@ namespace AutoPriceMobile.src.main
                             byte[] imgByte = reader.ReadBytes((int)stream.Length);
                             int duration = Convert.ToInt32(add_itemDuration.Text);
 
-                            SqlCommand cmd = new SqlCommand("INSERT INTO dbo.[ItemSale](ItemName, ItemImage, ItemDescription, UserID, UserName, Quantity, Price, Time, TimeEnd, Status) VALUES (@ItemName, @ItemImage, @ItemDescription, @UserID, @UserName, @Quantity, @Price, @Time, @TimeEnd, @Status)", conn);
+                            SqlCommand cmd = new SqlCommand("INSERT INTO dbo.[ItemSale](ItemName, ItemImage, ItemDescription, UserID, UserName, Quantity, Price, Time, TimeEnd, Status, SoldCount, PriceDiff, MinPrice) VALUES (@ItemName, @ItemImage, @ItemDescription, @UserID, @UserName, @Quantity, @Price, @Time, @TimeEnd, @Status, 0, 100, @MinPrice)", conn);
                             cmd.Parameters.AddWithValue("@ItemName", add_itemName.Text);
                             cmd.Parameters.Add("@ItemImage", SqlDbType.VarBinary).Value = imgByte;
                             cmd.Parameters.AddWithValue("@ItemDescription", add_itemDesc.Text);
@@ -114,6 +114,7 @@ namespace AutoPriceMobile.src.main
                             cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
                             cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+duration).ToString("yyyy-MM-dd HH:mm:ss tt"));
                             cmd.Parameters.AddWithValue("@Status", status);
+                            cmd.Parameters.AddWithValue("@MinPrice", Convert.ToDouble(add_itemPrice.Text) - 100);
                             cmd.ExecuteNonQuery();
                             lblText.Text = "Item Successfully Added.";
                         }
