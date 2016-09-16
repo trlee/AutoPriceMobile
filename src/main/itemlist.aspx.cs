@@ -41,8 +41,12 @@ namespace AutoPriceMobile.src.main
         protected void ItemList_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             SqlConnection sqlConn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand deleteItem = new SqlCommand("DELETE FROM dbo.[ItemSale] WHERE ItemID = @ItemID", sqlConn);
-            deleteItem.Parameters.AddWithValue("@ItemID", ItemList.Rows[e.RowIndex].Cells[10].Text);
+            SqlCommand deleteItem = new SqlCommand("DELETE FROM dbo.[ItemSale] WHERE ItemName = @ItemName AND Time = @Time AND TimeEnd = @TimeEnd", sqlConn);
+            deleteItem.Parameters.AddWithValue("@ItemName", ItemList.Rows[e.RowIndex].Cells[0].Text);
+            deleteItem.Parameters.AddWithValue("@Time", ItemList.Rows[e.RowIndex].Cells[7].Text);
+            deleteItem.Parameters.AddWithValue("@TimeEnd", ItemList.Rows[e.RowIndex].Cells[8].Text);
+            //SqlCommand deleteItem = new SqlCommand("DELETE FROM dbo.[ItemSale] WHERE ItemID = @ItemID", sqlConn);
+            //deleteItem.Parameters.AddWithValue("@ItemID", ItemList.Rows[e.RowIndex].Cells[10].Text);
 
             using (sqlConn)
             {

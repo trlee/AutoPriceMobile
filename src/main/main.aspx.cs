@@ -71,22 +71,24 @@ namespace AutoPriceMobile.src. main
                 DateTime end = Convert.ToDateTime(e.Row.Cells[8].Text);
                 double difference = Convert.ToDouble(e.Row.Cells[9].Text);
                 int soldCount = Convert.ToInt32(e.Row.Cells[10].Text);
+                double endPrice = Convert.ToDouble(e.Row.Cells[11].Text);
                 int quantity = Convert.ToInt32(e.Row.Cells[5].Text);
                 e.Row.Cells[9].Visible = false;
                 e.Row.Cells[10].Visible = false;
+                e.Row.Cells[11].Visible = false;
 
                 double total = 0;
                 if (soldCount == 0)
                 {
                     //(Starting Price)-((Starting Price)-(Ending Price))*{((Current Time)-(Starting Time))/(Ending Time)-(Starting Time))}
-                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours));
+                    total = (price - (price - endPrice) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours));
                 }
                 else
                 {
                     //(Starting Price)-((Starting Price)-(Ending Price))*{((Current Time)-(Starting Time))/(Ending Time)-(Starting Time))} 
                     //      +((Available quantity)-(Quantity sold))*Price Difference
 
-                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours) + (quantity - soldCount) * difference);
+                    total = (price - (price - endPrice) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours) + (quantity - soldCount) * difference);
                 }
 
                 e.Row.Cells[6].Text = Math.Round(total, 2).ToString();
@@ -104,18 +106,20 @@ namespace AutoPriceMobile.src. main
                 DateTime end = Convert.ToDateTime(e.Row.Cells[8].Text);
                 double difference = Convert.ToDouble(e.Row.Cells[9].Text);
                 int soldCount = Convert.ToInt32(e.Row.Cells[10].Text);
+                double endPrice = Convert.ToDouble(e.Row.Cells[11].Text);
                 int quantity = Convert.ToInt32(e.Row.Cells[5].Text);
                 e.Row.Cells[9].Visible = false;
                 e.Row.Cells[10].Visible = false;
+                e.Row.Cells[11].Visible = false;
 
                 double total = 0;
                 if (soldCount == 0)
                 {
-                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours));
+                    total = (price - (price - endPrice) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours));
                 }
                 else
                 {
-                    total = (price - (price - (price + difference)) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours) + (quantity-soldCount)*difference); 
+                    total = (price - (price - endPrice) * ((DateTime.Now.Subtract(start).TotalHours) / end.Subtract(start).TotalHours) + (quantity-soldCount)*difference); 
                 }
                 
 

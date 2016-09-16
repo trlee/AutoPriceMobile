@@ -26,6 +26,7 @@
                 <asp:BoundField DataField="TimeEnd" HeaderText="End Time" SortExpression="TimeEnd" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="PriceDiff" SortExpression="PriceDiff" ItemStyle-Width="100px" Visible="true"/>
                 <asp:BoundField DataField="SoldCount" SortExpression="SoldCount" ItemStyle-Width="100px" Visible="true" />
+                <asp:BoundField DataField="MinPrice" SortExpression="MinPrice" ItemStyle-Width="100px" Visible="true"/>
                 <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
                 <asp:TemplateField>
 			            <ItemTemplate >
@@ -63,6 +64,7 @@
                 <asp:BoundField DataField="TimeEnd" HeaderText="End Time" SortExpression="TimeEnd" ItemStyle-Width="100px" />
                 <asp:BoundField DataField="PriceDiff" SortExpression="PriceDiff" ItemStyle-Width="100px" Visible="true"/>
                 <asp:BoundField DataField="SoldCount" SortExpression="SoldCount" ItemStyle-Width="100px" Visible="true" />
+                <asp:BoundField DataField="MinPrice" SortExpression="MinPrice" ItemStyle-Width="100px" Visible="true"/>
                 <asp:BoundField DataField="Status" ItemStyle-Width="200px" Visible="false"></asp:BoundField>
                 <asp:TemplateField>
 			            <ItemTemplate >

@@ -54,6 +54,26 @@
             <asp:TableRow HorizontalAlign="Center">
                 <asp:TableCell>
                     <h3>
+                        End Price
+                    </h3>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:TextBox ID="add_minPrice" runat="server" placeholder="Enter the final price you wish your price to move towards" CssClass="txtbox"></asp:TextBox>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow HorizontalAlign="Center">
+                <asp:TableCell>
+                    <h3>
+                        Price Difference
+                    </h3>
+                </asp:TableCell>
+                <asp:TableCell>
+                    <asp:TextBox ID="add_priceDiff" runat="server" placeholder="Enter to control your item price over time (max 20%)" CssClass="txtbox"></asp:TextBox>
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow HorizontalAlign="Center">
+                <asp:TableCell>
+                    <h3>
                         Item Quantity
                     </h3>
                 </asp:TableCell>
@@ -71,6 +91,7 @@
                     <asp:TextBox ID="add_itemDuration" runat="server" placeholder="Duration" CssClass="txtbox"></asp:TextBox>
                 </asp:TableCell>
             </asp:TableRow>
+
             <asp:TableRow HorizontalAlign="Center">
                 <asp:TableCell>
                     <h3>

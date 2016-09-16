@@ -58,6 +58,24 @@ namespace AutoPriceMobile.src.main {
         protected global::System.Web.UI.WebControls.TextBox add_itemPrice;
         
         /// <summary>
+        /// add_minPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox add_minPrice;
+        
+        /// <summary>
+        /// add_priceDiff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox add_priceDiff;
+        
+        /// <summary>
         /// add_itemQty control.
         /// </summary>
         /// <remarks>

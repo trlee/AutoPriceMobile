@@ -243,6 +243,54 @@ namespace AutoPriceMobile.src.main
                 }
             }
 
+            SqlConnection sqlConn8 = new SqlConnection(Shared.SqlConnString);
+            using (sqlConn8)
+            {
+                try
+                {
+                    SqlCommand getUserInfo = new SqlCommand("SELECT PriceDiff FROM dbo.[ItemSale] WHERE ItemID = @ItemID", sqlConn8);
+                    getUserInfo.Parameters.AddWithValue("@ItemID", Request.QueryString["ItemID"]);
+                    sqlConn8.Open();
+
+                    SqlDataReader reader = getUserInfo.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            edit_priceDiff.Text = reader[0].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Response.Write(ex.Message);
+                }
+            }
+
+            SqlConnection sqlConn9 = new SqlConnection(Shared.SqlConnString);
+            using (sqlConn9)
+            {
+                try
+                {
+                    SqlCommand getUserInfo = new SqlCommand("SELECT MinPrice FROM dbo.[ItemSale] WHERE ItemID = @ItemID", sqlConn9);
+                    getUserInfo.Parameters.AddWithValue("@ItemID", Request.QueryString["ItemID"]);
+                    sqlConn9.Open();
+
+                    SqlDataReader reader = getUserInfo.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            edit_minPrice.Text = reader[0].ToString();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Response.Write(ex.Message);
+                }
+            }
+
             if (status == 1)
             {
                 edit_itemStatus.SelectedValue = "Global";
@@ -268,14 +316,20 @@ namespace AutoPriceMobile.src.main
 
         protected void submitbtn_Click(object sender, EventArgs e)
         {
-            double parseValue = 0;
-            bool parsed = Double.TryParse(edit_itemPrice.Text, out parseValue);
+            double itemPrice = 0;
+            bool parsed = Double.TryParse(edit_itemPrice.Text, out itemPrice);
 
-            int parseValue2 = 0;
-            bool parsed2 = Int32.TryParse(edit_itemQty.Text, out parseValue2);
+            int quantity = 0;
+            bool parsed2 = Int32.TryParse(edit_itemQty.Text, out quantity);
 
-            double parseValue3 = 0;
-            bool parsed3 = Double.TryParse(edit_itemDuration.Text, out parseValue3);
+            int timespan = 0;
+            bool parsed3 = Int32.TryParse(edit_itemDuration.Text, out timespan);
+
+            double minPrice = 0;
+            bool parsed4 = Double.TryParse(edit_minPrice.Text, out minPrice);
+
+            double priceDiff = 0;
+            bool parsed5 = Double.TryParse(edit_priceDiff.Text, out priceDiff);
 
             if (edit_itemDesc.Text == "" || edit_itemName.Text == "")
             {
@@ -285,6 +339,11 @@ namespace AutoPriceMobile.src.main
             else if (edit_itemPrice.Text == "" || edit_itemQty.Text == "")
             {
                 lblText.Text = "Please enter a price and quantity for the item.";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (edit_priceDiff.Text == "" || edit_minPrice.Text == "")
+            {
+                lblText.Text = "Please provide your price difference and end price for the item.";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
             else if (edit_itemDuration.Text == "")
@@ -307,14 +366,40 @@ namespace AutoPriceMobile.src.main
                 lblText.Text = "Please enter a valid input for the duration (numbers only).";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if (Convert.ToDouble(edit_itemDuration.Text) <= 0)
+            else if (!parsed4)
+            {
+                lblText.Text = "Please enter a valid input for the end price (numbers only).";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (!parsed5)
+            {
+                lblText.Text = "Please enter a valid input for the price difference (numbers only).";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (timespan <= 0)
             {
                 lblText.Text = "Please enter a positive value for the duration (no value less than 0).";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (itemPrice <= 0)
+            {
+                lblText.Text = "Please enter a positive value for the item price (no value less than 0).";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (minPrice <= 0)
+            {
+                lblText.Text = "Please enter a positive value for the end price (no value less than 0).";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (quantity <= 0)
+            {
+                lblText.Text = "Please enter a positive value for the quantity (no value less than 0).";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
             else
             {
                 int status = 0;
+                bool check = true;
                 
                 if (edit_itemStatus.SelectedValue == "Global")
                 {
@@ -324,37 +409,81 @@ namespace AutoPriceMobile.src.main
                 {
                     status = 0;
                 }
+
+                if (priceDiff <= 0)
+                {
+                    priceDiff = priceDiff * -1;
+                    if ((priceDiff * 5) > itemPrice)
+                    {
+                        lblText.Text = "Your price difference cannot be more than 20% of your original price";
+                        lblText.ForeColor = System.Drawing.Color.Red;
+                        check = false;
+                    }
+                    if (minPrice > itemPrice)
+                    {
+                        lblText.Text = "If your price difference is 0 or less, your item price must be higher than your end price";
+                        lblText.ForeColor = System.Drawing.Color.Red;
+                        check = false;
+                    }
+                }
+                else
+                {
+                    if ((priceDiff * 5) > itemPrice)
+                    {
+                        lblText.Text = "Your price difference cannot be more than 20% of your original price";
+                        lblText.ForeColor = System.Drawing.Color.Red;
+                        check = false;
+                    }
+                    if (minPrice < itemPrice)
+                    {
+                        lblText.Text = "If your price difference is positive, your item price must be lower than your end price";
+                        lblText.ForeColor = System.Drawing.Color.Red;
+                        check = false;
+                    }
+                }
+
                 SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-                SqlCommand cmd = new SqlCommand("UPDATE dbo.[ItemSale] SET ItemName=@ItemName, ItemDescription=@ItemDescription, UserName=@UserName, Quantity=@Quantity, Price=@Price, Time=@Time, TimeEnd=@TimeEnd, Status=@Status WHERE ItemID=@ItemID", conn);
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.[ItemSale] SET ItemName=@ItemName, ItemDescription=@ItemDescription, UserName=@UserName, Quantity=@Quantity, Price=@Price, Time=@Time, TimeEnd=@TimeEnd, Status=@Status, PriceDiff=@PriceDiff, MinPrice=@MinPrice WHERE ItemID=@ItemID", conn);
                 cmd.Parameters.AddWithValue("@ItemName", edit_itemName.Text);
                 cmd.Parameters.AddWithValue("@ItemDescription", edit_itemDesc.Text);
                 cmd.Parameters.AddWithValue("@UserName", Session["username"].ToString());
                 cmd.Parameters.AddWithValue("@Quantity", edit_itemQty.Text);
-                cmd.Parameters.AddWithValue("@Price", Math.Round(parseValue, 2));
+                cmd.Parameters.AddWithValue("@Price", Math.Round(itemPrice, 2));
                 cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
                 cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+Convert.ToDouble(edit_itemDuration.Text)).ToString("yyyy-MM-dd HH:mm:ss tt"));
                 cmd.Parameters.AddWithValue("@Status", status);
+                cmd.Parameters.AddWithValue("@PriceDiff", edit_priceDiff.Text);
+                cmd.Parameters.AddWithValue("@MinPrice", edit_minPrice.Text);
                 cmd.Parameters.AddWithValue("@ItemID", Request.QueryString["ItemID"].ToString());
 
                 using (conn)
                 {
-                    try
-                    {         
-                        if (parsed && parsed2 && parsed3)
+                    if (check)
+                    {
+                        try
                         {
-                            conn.Open();
-                            cmd.ExecuteNonQuery();
-                            lblText.Text = "Item Successfully updated.";
+                            if (parsed && parsed2 && parsed3 && parsed4 && parsed5)
+                            {
+                                conn.Open();
+                                cmd.ExecuteNonQuery();
+                                lblText.Text = "Item Successfully updated.";
+                                lblText.ForeColor = System.Drawing.Color.Green;
+                            }
+                            else
+                            {
+                                lblText.Text = "An unexpected error has occured, please contact the administrator for more info.";
+                                lblText.ForeColor = System.Drawing.Color.Red;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            lblText.Text = "An unexpected error has occured, please contact the administrator for more info.";
-                            lblText.ForeColor = System.Drawing.Color.Red;
+                            Response.Write(ex.Message);
                         }
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Response.Write(ex.Message);
+                        lblText.Text = "Your price difference cannot be more than 20% of your original price. Please enter a correct input for End Price";
+                        lblText.ForeColor = System.Drawing.Color.Red;
                     }
                 }
             }
