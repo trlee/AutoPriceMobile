@@ -410,37 +410,37 @@ namespace AutoPriceMobile.src.main
                     status = 0;
                 }
 
-                if (priceDiff <= 0)
-                {
-                    priceDiff = priceDiff * -1;
-                    if ((priceDiff * 5) > itemPrice)
-                    {
-                        lblText.Text = "Your price difference cannot be more than 20% of your original price";
-                        lblText.ForeColor = System.Drawing.Color.Red;
-                        check = false;
-                    }
-                    if (minPrice > itemPrice)
-                    {
-                        lblText.Text = "If your price difference is 0 or less, your item price must be higher than your end price";
-                        lblText.ForeColor = System.Drawing.Color.Red;
-                        check = false;
-                    }
-                }
-                else
-                {
-                    if ((priceDiff * 5) > itemPrice)
-                    {
-                        lblText.Text = "Your price difference cannot be more than 20% of your original price";
-                        lblText.ForeColor = System.Drawing.Color.Red;
-                        check = false;
-                    }
-                    if (minPrice < itemPrice)
-                    {
-                        lblText.Text = "If your price difference is positive, your item price must be lower than your end price";
-                        lblText.ForeColor = System.Drawing.Color.Red;
-                        check = false;
-                    }
-                }
+                //if (priceDiff <= 0)
+                //{
+                //    priceDiff = priceDiff * -1;
+                //    if ((priceDiff * 5) > itemPrice)
+                //    {
+                //        lblText.Text = "Your price difference cannot be more than 20% of your original price";
+                //        lblText.ForeColor = System.Drawing.Color.Red;
+                //        check = false;
+                //    }
+                //    if (minPrice > itemPrice)
+                //    {
+                //        lblText.Text = "If your price difference is 0 or less, your item price must be higher than your end price";
+                //        lblText.ForeColor = System.Drawing.Color.Red;
+                //        check = false;
+                //    }
+                //}
+                //else
+                //{
+                //    if ((priceDiff * 5) > itemPrice)
+                //    {
+                //        lblText.Text = "Your price difference cannot be more than 20% of your original price";
+                //        lblText.ForeColor = System.Drawing.Color.Red;
+                //        check = false;
+                //    }
+                //    if (minPrice < itemPrice)
+                //    {
+                //        lblText.Text = "If your price difference is positive, your item price must be lower than your end price";
+                //        lblText.ForeColor = System.Drawing.Color.Red;
+                //        check = false;
+                //    }
+                //}
 
                 SqlConnection conn = new SqlConnection(Shared.SqlConnString);
                 SqlCommand cmd = new SqlCommand("UPDATE dbo.[ItemSale] SET ItemName=@ItemName, ItemDescription=@ItemDescription, UserName=@UserName, Quantity=@Quantity, Price=@Price, Time=@Time, TimeEnd=@TimeEnd, Status=@Status, PriceDiff=@PriceDiff, MinPrice=@MinPrice WHERE ItemID=@ItemID", conn);
@@ -482,7 +482,8 @@ namespace AutoPriceMobile.src.main
                     }
                     else
                     {
-                        lblText.Text = "Your price difference cannot be more than 20% of your original price. Please enter a correct input for End Price";
+                        //lblText.Text = "Your price difference cannot be more than 20% of your original price. Please enter a correct input for End Price";
+                        lblText.Text = "An unexpected error has occurred.";
                         lblText.ForeColor = System.Drawing.Color.Red;
                     }
                 }
