@@ -85,13 +85,13 @@ namespace AutoPriceMobile.src.main {
         protected global::System.Web.UI.WebControls.TextBox add_itemQty;
         
         /// <summary>
-        /// add_itemDuration control.
+        /// add_Time control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox add_itemDuration;
+        protected global::System.Web.UI.WebControls.Calendar add_Time;
         
         /// <summary>
         /// add_itemStatus control.

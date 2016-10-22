@@ -29,7 +29,7 @@ namespace AutoPriceMobile.src. main
         protected void FillFriendList()
         {
             SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand getItems = new SqlCommand("SELECT * FROM dbo.[ItemSale] i, dbo.[FollowerList] f WHERE i.UserID = f.UserID AND f.FollowerID = " + Session["userid"] + " AND i.TimeEnd >= '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt") + "' ORDER BY Time DESC;", conn);
+            SqlCommand getItems = new SqlCommand("SELECT * FROM dbo.[ItemSale] i, dbo.[FollowerList] f WHERE i.UserID = f.UserID AND f.FollowerID = " + Session["userid"] + " AND i.TimeEnd >= '" + DateTime.Now.ToString("yyyy-MM-dd") + "' ORDER BY Time DESC;", conn);
             SqlDataAdapter da = new SqlDataAdapter(getItems);
             DataSet dt = new DataSet();
             da.Fill(dt);
@@ -42,7 +42,7 @@ namespace AutoPriceMobile.src. main
         protected void FillGlobalList()
         {
             SqlConnection conn = new SqlConnection(Shared.SqlConnString);
-            SqlCommand getGlobalItems = new SqlCommand("SELECT TOP 100 * FROM dbo.[ItemSale] WHERE Status = 1 AND TimeEnd >= '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt") + "' ORDER BY Time DESC", conn);
+            SqlCommand getGlobalItems = new SqlCommand("SELECT TOP 100 * FROM dbo.[ItemSale] WHERE Status = 1 AND TimeEnd >= '" + DateTime.Now.ToString("yyyy-MM-dd") + "' ORDER BY Time DESC", conn);
             SqlDataAdapter da = new SqlDataAdapter(getGlobalItems);
             DataSet dt = new DataSet();
             da.Fill(dt);
@@ -73,6 +73,8 @@ namespace AutoPriceMobile.src. main
                 int soldCount = Convert.ToInt32(e.Row.Cells[10].Text);
                 double endPrice = Convert.ToDouble(e.Row.Cells[11].Text);
                 int quantity = Convert.ToInt32(e.Row.Cells[5].Text);
+                e.Row.Cells[7].Visible = false;
+                e.Row.Cells[8].Visible = false;
                 e.Row.Cells[9].Visible = false;
                 e.Row.Cells[10].Visible = false;
                 e.Row.Cells[11].Visible = false;
@@ -108,6 +110,8 @@ namespace AutoPriceMobile.src. main
                 int soldCount = Convert.ToInt32(e.Row.Cells[10].Text);
                 double endPrice = Convert.ToDouble(e.Row.Cells[11].Text);
                 int quantity = Convert.ToInt32(e.Row.Cells[5].Text);
+                e.Row.Cells[7].Visible = false;
+                e.Row.Cells[8].Visible = false;
                 e.Row.Cells[9].Visible = false;
                 e.Row.Cells[10].Visible = false;
                 e.Row.Cells[11].Visible = false;

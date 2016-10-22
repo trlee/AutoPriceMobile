@@ -21,6 +21,12 @@ namespace AutoPriceMobile.src.main
             {
                 Response.Redirect("~/login.aspx");
             }
+            if (!IsPostBack)
+            {
+                add_Time.SelectedDate = DateTime.Today;
+                add_Time.VisibleDate = DateTime.Today;
+            }
+
         }
 
         protected void submitbtn_Click(object sender, EventArgs e)
@@ -31,8 +37,8 @@ namespace AutoPriceMobile.src.main
             int quantity = 0;
             bool parsed2 = Int32.TryParse(add_itemQty.Text, out quantity);
 
-            int timespan = 0;
-            bool parsed3 = Int32.TryParse(add_itemDuration.Text, out timespan);
+            //int timespan = 0;
+            //bool parsed3 = Int32.TryParse(add_itemDuration.Text, out timespan);
 
             double minPrice = 0;
             bool parsed4 = Double.TryParse(add_minPrice.Text, out minPrice);
@@ -40,46 +46,53 @@ namespace AutoPriceMobile.src.main
             double priceDiff = 0;
             bool parsed5 = Double.TryParse(add_priceDiff.Text, out priceDiff);
 
-            if(!add_itemImg.HasFile)
+            double dayDifference = (add_Time.SelectedDate - DateTime.Now).TotalDays;
+
+            if (dayDifference < 0)
+            {
+                lblText.Text = "Please choose a correct item duration";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (!add_itemImg.HasFile)
             {
                 lblText.Text = "Please add a photo of the item.";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if(add_itemDesc.Text == "" || add_itemName.Text == "")
+            else if (add_itemDesc.Text == "" || add_itemName.Text == "")
             {
                 lblText.Text = "Please add a name and description for the item.";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if(add_itemPrice.Text == "" || add_itemQty.Text == "")
+            else if (add_itemPrice.Text == "" || add_itemQty.Text == "")
             {
                 lblText.Text = "Please add a price and quantity for the item.";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if(add_priceDiff.Text == "" || add_minPrice.Text == "")
+            else if (add_priceDiff.Text == "" || add_minPrice.Text == "")
             {
                 lblText.Text = "Please provide your price difference and end price for the item.";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if(add_itemDuration.Text == "")
-            {
-                lblText.Text = "Please add a valid duration for the item.";
-                lblText.ForeColor = System.Drawing.Color.Red;
-            }
-            else if(!parsed)
+            //else if (add_itemDuration.Text == "")
+            //{
+            //    lblText.Text = "Please add a valid duration for the item.";
+            //    lblText.ForeColor = System.Drawing.Color.Red;
+            //}
+            else if (!parsed)
             {
                 lblText.Text = "Please enter a valid input for the price (numbers only).";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if(!parsed2)
+            else if (!parsed2)
             {
                 lblText.Text = "Please enter a valid input for the quantity (numbers only).";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if (!parsed3)
-            {
-                lblText.Text = "Please enter a valid input for the duration (numbers only).";
-                lblText.ForeColor = System.Drawing.Color.Red;
-            }
+            //else if (!parsed3)
+            //{
+            //    lblText.Text = "Please enter a valid input for the duration (numbers only).";
+            //    lblText.ForeColor = System.Drawing.Color.Red;
+            //}
             else if (!parsed4)
             {
                 lblText.Text = "Please enter a valid input for the end price (numbers only).";
@@ -90,12 +103,12 @@ namespace AutoPriceMobile.src.main
                 lblText.Text = "Please enter a valid input for the price difference (numbers only).";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if(timespan <= 0)
-            {
-                lblText.Text = "Please enter a positive value for the duration (no value less than 0).";
-                lblText.ForeColor = System.Drawing.Color.Red;
-            }
-            else if(itemPrice <= 0)
+            //else if (timespan <= 0)
+            //{
+            //    lblText.Text = "Please enter a positive value for the duration (no value less than 0).";
+            //    lblText.ForeColor = System.Drawing.Color.Red;
+            //}
+            else if (itemPrice <= 0)
             {
                 lblText.Text = "Please enter a positive value for the item price (no value less than 0).";
                 lblText.ForeColor = System.Drawing.Color.Red;
@@ -171,7 +184,7 @@ namespace AutoPriceMobile.src.main
                                 Stream stream = postedFile.InputStream;
                                 BinaryReader reader = new BinaryReader(stream);
                                 byte[] imgByte = reader.ReadBytes((int)stream.Length);
-                                int duration = Convert.ToInt32(add_itemDuration.Text);
+                                //int duration = Convert.ToInt32(add_itemDuration.Text);
 
                                 SqlCommand cmd = new SqlCommand("INSERT INTO dbo.[ItemSale](ItemName, ItemImage, ItemDescription, UserID, UserName, Quantity, Price, Time, TimeEnd, Status, SoldCount, PriceDiff, MinPrice) VALUES (@ItemName, @ItemImage, @ItemDescription, @UserID, @UserName, @Quantity, @Price, @Time, @TimeEnd, @Status, 0, @PriceDiff, @MinPrice)", conn);
                                 cmd.Parameters.AddWithValue("@ItemName", add_itemName.Text);
@@ -181,8 +194,10 @@ namespace AutoPriceMobile.src.main
                                 cmd.Parameters.AddWithValue("@UserName", Session["username"].ToString());
                                 cmd.Parameters.AddWithValue("@Quantity", add_itemQty.Text);
                                 cmd.Parameters.AddWithValue("@Price", add_itemPrice.Text);
-                                cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
-                                cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+duration).ToString("yyyy-MM-dd HH:mm:ss tt"));
+                                cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd"));
+                                cmd.Parameters.AddWithValue("@TimeEnd", add_Time.SelectedDate.ToString("yyyy-MM-dd"));
+                                //cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
+                                //cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+duration).ToString("yyyy-MM-dd HH:mm:ss tt"));
                                 cmd.Parameters.AddWithValue("@Status", status);
                                 cmd.Parameters.AddWithValue("@PriceDiff", add_priceDiff.Text);
                                 cmd.Parameters.AddWithValue("@MinPrice", add_minPrice.Text);

@@ -88,7 +88,7 @@
                     </h3>
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:TextBox ID="add_itemDuration" runat="server" placeholder="Duration" CssClass="txtbox"></asp:TextBox>
+                    <asp:Calendar ID="add_Time" runat="server" SelectedDate='<%#DateTime.Today%>' VisibleDate='<%#DateTime.Today%>'></asp:Calendar>
                 </asp:TableCell>
             </asp:TableRow>
 

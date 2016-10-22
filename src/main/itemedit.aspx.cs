@@ -233,7 +233,7 @@ namespace AutoPriceMobile.src.main
                     {
                         while (reader.Read())
                         {
-                            end = Convert.ToDateTime(reader[0].ToString());
+                            edit_Time.SelectedDate = Convert.ToDateTime(reader[0].ToString());
                         }
                     }
                 }
@@ -300,17 +300,17 @@ namespace AutoPriceMobile.src.main
                 edit_itemStatus.SelectedValue = "Friends Only";
             }
 
-            double duration = (end - DateTime.Now).TotalDays;
+            //double duration = (end - DateTime.Now).TotalDays;
 
-            if (duration < 0)
-            {
-                edit_itemDuration.Text = "0";
-            }
-            else
-            {
-                Math.Round(duration, 2);
-                edit_itemDuration.Text = duration.ToString("#.##");
-            }
+            //if (duration < 0)
+            //{
+            //    edit_itemDuration.Text = "0";
+            //}
+            //else
+            //{
+            //    Math.Round(duration, 2);
+            //    edit_itemDuration.Text = duration.ToString("#.##");
+            //}
 
         }
 
@@ -322,8 +322,8 @@ namespace AutoPriceMobile.src.main
             int quantity = 0;
             bool parsed2 = Int32.TryParse(edit_itemQty.Text, out quantity);
 
-            int timespan = 0;
-            bool parsed3 = Int32.TryParse(edit_itemDuration.Text, out timespan);
+            //int timespan = 0;
+            //bool parsed3 = Int32.TryParse(edit_itemDuration.Text, out timespan);
 
             double minPrice = 0;
             bool parsed4 = Double.TryParse(edit_minPrice.Text, out minPrice);
@@ -331,7 +331,14 @@ namespace AutoPriceMobile.src.main
             double priceDiff = 0;
             bool parsed5 = Double.TryParse(edit_priceDiff.Text, out priceDiff);
 
-            if (edit_itemDesc.Text == "" || edit_itemName.Text == "")
+            double dayDifference = (edit_Time.SelectedDate - DateTime.Now).TotalDays;
+
+            if (dayDifference < 0)
+            {
+                lblText.Text = "Please choose a correct item duration";
+                lblText.ForeColor = System.Drawing.Color.Red;
+            }
+            else if (edit_itemDesc.Text == "" || edit_itemName.Text == "")
             {
                 lblText.Text = "Please enter a name and description for the item.";
                 lblText.ForeColor = System.Drawing.Color.Red;
@@ -346,11 +353,11 @@ namespace AutoPriceMobile.src.main
                 lblText.Text = "Please provide your price difference and end price for the item.";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if (edit_itemDuration.Text == "")
-            {
-                lblText.Text = "Please enter a valid duration for the item.";
-                lblText.ForeColor = System.Drawing.Color.Red;
-            }
+            //else if (edit_itemDuration.Text == "")
+            //{
+            //    lblText.Text = "Please enter a valid duration for the item.";
+            //    lblText.ForeColor = System.Drawing.Color.Red;
+            //}
             else if (!parsed)
             {
                 lblText.Text = "Please enter a valid input for the price (numbers only).";
@@ -361,11 +368,11 @@ namespace AutoPriceMobile.src.main
                 lblText.Text = "Please enter a valid input for the quantity (numbers only).";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if (!parsed3)
-            {
-                lblText.Text = "Please enter a valid input for the duration (numbers only).";
-                lblText.ForeColor = System.Drawing.Color.Red;
-            }
+            //else if (!parsed3)
+            //{
+            //    lblText.Text = "Please enter a valid input for the duration (numbers only).";
+            //    lblText.ForeColor = System.Drawing.Color.Red;
+            //}
             else if (!parsed4)
             {
                 lblText.Text = "Please enter a valid input for the end price (numbers only).";
@@ -376,11 +383,11 @@ namespace AutoPriceMobile.src.main
                 lblText.Text = "Please enter a valid input for the price difference (numbers only).";
                 lblText.ForeColor = System.Drawing.Color.Red;
             }
-            else if (timespan <= 0)
-            {
-                lblText.Text = "Please enter a positive value for the duration (no value less than 0).";
-                lblText.ForeColor = System.Drawing.Color.Red;
-            }
+            //else if (timespan <= 0)
+            //{
+            //    lblText.Text = "Please enter a positive value for the duration (no value less than 0).";
+            //    lblText.ForeColor = System.Drawing.Color.Red;
+            //}
             else if (itemPrice <= 0)
             {
                 lblText.Text = "Please enter a positive value for the item price (no value less than 0).";
@@ -449,8 +456,10 @@ namespace AutoPriceMobile.src.main
                 cmd.Parameters.AddWithValue("@UserName", Session["username"].ToString());
                 cmd.Parameters.AddWithValue("@Quantity", edit_itemQty.Text);
                 cmd.Parameters.AddWithValue("@Price", Math.Round(itemPrice, 2));
-                cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
-                cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+Convert.ToDouble(edit_itemDuration.Text)).ToString("yyyy-MM-dd HH:mm:ss tt"));
+                cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@TimeEnd", edit_Time.SelectedDate.ToString("yyyy-MM-dd"));
+                //cmd.Parameters.AddWithValue("@Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss tt"));
+                //cmd.Parameters.AddWithValue("@TimeEnd", DateTime.Now.AddDays(+Convert.ToDouble(edit_itemDuration.Text)).ToString("yyyy-MM-dd HH:mm:ss tt"));
                 cmd.Parameters.AddWithValue("@Status", status);
                 cmd.Parameters.AddWithValue("@PriceDiff", edit_priceDiff.Text);
                 cmd.Parameters.AddWithValue("@MinPrice", edit_minPrice.Text);
@@ -462,7 +471,7 @@ namespace AutoPriceMobile.src.main
                     {
                         try
                         {
-                            if (parsed && parsed2 && parsed3 && parsed4 && parsed5)
+                            if (parsed && parsed2 && parsed4 && parsed5)
                             {
                                 conn.Open();
                                 cmd.ExecuteNonQuery();
